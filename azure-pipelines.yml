@@ -1,8 +1,6 @@
 trigger:
 -  main
 
-pool:
-  vmImage: 'ubuntu-latest'
 
 variables:
   brahim:  'helloyeeessiiiiir'
@@ -15,13 +13,22 @@ stages:
 
   jobs:
     - job: buildi_baabaha
+      container:
+          image: nginx
+      variables:
+          hhh:  "hohoh"
       steps:
         - script: |
                 echo  $(brahim)
                 ls -l /
+                echo $(hhh)
 
  
     - job: buildi_babaha2
+      variables:
+        ZZZ: "ettarch"
+      container:
+          image: ubuntu-latest
       steps:
         - script: |
                 echo "hello"
