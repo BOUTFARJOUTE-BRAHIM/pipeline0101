@@ -19,39 +19,5 @@ stages:
           hhh:  "hohoh"
       steps:
         - script: |
-                echo  $(brahim)
-                ls -l /
-                echo $(hhh)
-                touch hhh && echo "hello" > hhh
-        - publish: hhh
-          artifact: fichier01
-
- 
-    - job: buildi_babaha2
-      dependsOn:  buildi_baabaha
-      variables:
-        ZZZ: "ettarch"
-      container:
-          image:  nginx
-      steps:
-        - download: current
-          artifact: fichier01
-        - script: |
-                echo "hello"
-                 cat $(Pipeline.Workspace)/fichier01/hhh
-      
-
-- stage: test
-  jobs:
-    - job: test1
-      variables:
-        hhh: 'voi'
-      container: nginx
-      steps:
-        - script: |
-              echo "hheheehe"
-    - job: test2
-      container: nginx
-      steps:
-        - script: |
-             echo "fjrhrk"
+                cd order-service
+                ls -l .
