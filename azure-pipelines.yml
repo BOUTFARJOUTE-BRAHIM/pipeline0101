@@ -33,3 +33,17 @@ stages:
       steps:
         - script: |
                 echo "hello"
+
+- stage: test
+  jobs:
+    - job: test1
+      variables:
+        hhh: 'voi'
+      container: nginx
+      steps:
+        - script: |
+              echo "hheheehe"
+    - job: test2
+      steps:
+        - script: |
+             echo "fjrhrk"
