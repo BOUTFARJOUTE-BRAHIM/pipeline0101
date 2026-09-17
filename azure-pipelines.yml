@@ -25,10 +25,11 @@ stages:
 
  
     - job: buildi_babaha2
+      dependsOn:  buildi_baabaha
       variables:
         ZZZ: "ettarch"
       container:
-          image: ubuntu-latest
+          image:  nginx
       steps:
         - script: |
                 echo "hello"
