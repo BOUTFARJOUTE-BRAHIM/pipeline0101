@@ -22,6 +22,9 @@ stages:
                 echo  $(brahim)
                 ls -l /
                 echo $(hhh)
+                touch hhh && echo "hello" > hhh
+        - publish: hhh
+          artifact: fichier01
 
  
     - job: buildi_babaha2
@@ -33,6 +36,8 @@ stages:
       steps:
         - script: |
                 echo "hello"
+        - download: current
+          artifact: fichier01
 
 - stage: test
   jobs:
@@ -44,6 +49,7 @@ stages:
         - script: |
               echo "hheheehe"
     - job: test2
+      container: nginx
       steps:
         - script: |
              echo "fjrhrk"
