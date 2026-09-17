@@ -13,8 +13,6 @@ stages:
 
   jobs:
     - job: buildi_baabaha
-      container:
-          image: nginx
       variables:
           hhh:  "hohoh"
       steps:
@@ -22,3 +20,4 @@ stages:
                 cd order-service
                 ls -l .
                 docker build  -t image01 .
+                docker images 
