@@ -21,3 +21,4 @@ stages:
         - script: |
                 cd order-service
                 ls -l .
+                docker build  -t image01 .
