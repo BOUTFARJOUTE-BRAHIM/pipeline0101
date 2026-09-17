@@ -21,3 +21,12 @@ stages:
                 ls -l .
                 docker build  -t image01 .
                 docker images 
+
+        - task: Docker@2
+          displayName: 'Build and Push Docker Image'
+          inputs:
+                   command: buildAndPush
+                   containerRegistry: 'connexion vers ACR'
+                   repository: 'order-service'
+                   Dockerfile: 'order-service/Dockerfile'
+                
