@@ -38,7 +38,7 @@ stages:
           artifact: fichier01
         - script: |
                 echo "hello"
-                cat hhh
+                cat cat $(Pipeline.Workspace)/fichier01/hhh
       
 
 - stage: test
