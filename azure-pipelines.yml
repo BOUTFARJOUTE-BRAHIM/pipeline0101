@@ -5,14 +5,13 @@ variables:
   gg: "hjj"
 
 stages:
-  - stage: build
+  - stage: build_et_test
     jobs:
-      - job: buildibabaha
+      - job: buildiimage
 
         variables:
           hhh: "jj"
           port: 3214
-
         steps:
           - script: |
               echo "hello this is the port $(port)"
@@ -20,23 +19,33 @@ stages:
               cd order-service
 
               docker build -t image001 .
+              sleep 5
+              docker save -o image001.tar  image001
+          - publish: image001.tar
+            artifact: dockerimage
+            
 
-              sudo apt-get update
-              sudo apt-get install -y wget gnupg
 
-              wget -qO- https://aquasecurity.github.io/trivy-repo/deb/public.key | \
-                gpg --dearmor | \
-                sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+      - job: Scan_image_with_trivy
+        steps:
+            - download: current
+              artifact: dockerimage
+            - script:  | 
+                 sudo apt-get update
+                 sudo apt-get install -y wget gnupg
+                 wget -qO- https://aquasecurity.github.io/trivy-repo/deb/public.key | \
+                   gpg --dearmor | \
+                 sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
 
-              echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] \
-                https://aquasecurity.github.io/trivy-repo/deb \
-                generic main" | \
-                sudo tee /etc/apt/sources.list.d/trivy.list
+                  echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] \
+                   https://aquasecurity.github.io/trivy-repo/deb \
+                   generic main" | \
+                    sudo tee /etc/apt/sources.list.d/trivy.list
 
-              sudo apt-get update
-              sudo apt-get install -y trivy
+                  sudo apt-get update
+                  sudo apt-get install -y trivy
+                  docker images
+                  cd $(pipeline.WorkSpace)/dockerimage
 
-              trivy --version
-
-              trivy image image001
-
+                  docker load -i image001.tar
+                  trivy image image001
