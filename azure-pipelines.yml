@@ -20,8 +20,8 @@ stages:
 
               docker build -t image001 .
               sleep 5
-              docker save -o image001.tar  image001
-          - publish: image001.tar
+              docker save -o '$(pipeline.Workspace)/image001.tar'  image001
+          - publish: '$(pipeline.Workspace)/image001.tar'
             artifact: dockerimage
             
 
